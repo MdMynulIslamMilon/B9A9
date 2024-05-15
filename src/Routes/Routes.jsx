@@ -15,11 +15,6 @@ const Routes = createBrowserRouter([
                 element:<Home></Home>
             },
             {
-                path:"/Estate",
-                element:<Estate></Estate>,
-                loader: () => fetch("/card.json"),
-            },
-            {
                 path:"/login",
                 element: <Login></Login>
             },
