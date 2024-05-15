@@ -4,7 +4,6 @@ import Home from "../Home/Home";
 import Login from "../Login/Login";
 import Banner from "../Banner/Banner";
 import Registration from "../Registration/Registtration";
-import Estate from "../Estate/Estate";
 const Routes = createBrowserRouter([
     {
         path:"/",
