@@ -4,6 +4,7 @@ import Home from "../Home/Home";
 import Login from "../Login/Login";
 import Banner from "../Banner/Banner";
 import Registration from "../Registration/Registtration";
+import Estate from "../Estate/Estate";
 const Routes = createBrowserRouter([
     {
         path:"/",
@@ -12,6 +13,11 @@ const Routes = createBrowserRouter([
             {
                 path:"/",
                 element:<Home></Home>
+            },
+            {
+                path:"/Estate",
+                element:<Estate></Estate>,
+                loader: () => fetch("/card.json"),
             },
             {
                 path:"/login",

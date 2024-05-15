@@ -6,13 +6,13 @@ const Login = () => {
       <Navbar></Navbar>
       <div class=" mx-auto mt-24 w-full max-w-sm p-4 bg-red-300 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
         <form class="space-y-6" action="#">
-          <h5 class="text-xl font-medium text-gray-900 dark:text-white">
+          <h5 class="text-xl text-white font-medium text-gray-900 dark:text-white">
             Sign in to our platform
           </h5>
           <div>
             <label
               for="email"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left"
             >
               Your email
             </label>
@@ -28,7 +28,7 @@ const Login = () => {
           <div>
             <label
               for="password"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left"
             >
               Your password
             </label>

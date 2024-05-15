@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1",
+    "image": "https://i.ibb.co/K0PDbQ2/office.jpg",
+    "title": "Modern Office Space",
+    "description": "Spacious office building with panoramic views of the city skyline.",
+    "price": "15000",
+    "status": "Rent",
+    "area": 5000,
+    "location": "New York City",
+    "facilities": ["Parking", "Elevator", "Conference Rooms"],
+    "segment": "Office buildings"
+  },
+  {
+    "id": "2",
+    "image": "https://i.ibb.co/8D78kWw/retailspace.jpg",
+    "title": "Retail Storefront",
+    "description": "Prime retail space in a bustling shopping district.",
+    "price": "500000",
+    "status": "Sell",
+    "area": 2000,
+    "location": "Los Angeles",
+    "facilities": ["Storefront Display", "High Foot Traffic"],
+    "segment": "Retail spaces"
+  },
+  {
+    "id": "3",
+    "image": "https://i.ibb.co/5kXYwVN/Warehouse.jpg",
+    "title": "Large Warehouse",
+    "description": "Spacious warehouse with loading docks and ample storage.",
+    "price": "8000",
+    "status": "Rent",
+    "area": 10000,
+    "location": "Chicago",
+    "facilities": ["Loading Docks", "Storage Space"],
+    "segment": "Warehouses"
+  },
+  {
+    "id": "4",
+    "image": "https://i.ibb.co/bJwpqtV/industrial.jpg",
+    "title": "Industrial Facility",
+    "description": "Versatile industrial facility suitable for manufacturing or distribution.",
+    "price": "1000000",
+    "status": "Sell",
+    "area": 15000,
+    "location": "Houston",
+    "facilities": ["Manufacturing Equipment", "Distribution Center"],
+    "segment": "Industrial facilities"
+  },
+  {
+    "id": "5",
+    "image": "https://i.ibb.co/mH256J7/restaurent.jpg",
+    "title": "Cozy Restaurant",
+    "description": "Charming restaurant space with a fully equipped kitchen and outdoor patio.",
+    "price": "7000",
+    "status": "Rent",
+    "area": 1500,
+    "location": "Miami",
+    "facilities": ["Fully Equipped Kitchen", "Outdoor Patio"],
+    "segment": "Restaurants"
+  },
+  {
+    "id": "6",
+    "image": "https://i.ibb.co/RCMBDv9/entertainment.jpg",
+    "title": "Entertainment Venue",
+    "description": "Exciting entertainment venue with a stage and bar area.",
+    "price": "200000",
+    "status": "Sell",
+    "area": 8000,
+    "location": "Las Vegas",
+    "facilities": ["Stage", "Bar", "Seating Area"],
+    "segment": "Entertainment venues"
+  }
+]
