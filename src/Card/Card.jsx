@@ -1,10 +1,10 @@
 import { FaChartArea, FaLocationDot } from "react-icons/fa6";
 import { HiStatusOnline } from "react-icons/hi";
-
+import { Link } from "react-router-dom";
 const Card = ({ card }) => {
-    const { image, title, description, price, status, area, location, facilities, segment } = card;
+    const { image, title, description, price, status, area, location,  segment } = card;
     return (
-        <div className="card bg-base-100 shadow-xl lg:w-[380px] ">
+        <div  className="card bg-base-100 shadow-xl h-[450px] w-[400px] ">
             <figure>
                 <img
                     src={image}
@@ -19,12 +19,18 @@ const Card = ({ card }) => {
                 <h2 className="card-title">
                     <div className=""> {title}</div>
                 </h2>
-                <p>{description}</p>
-                <div className="card-actions d">
+                <p>{
+                    description.length >20?
+                        <p>{description.slice(0, 28)} <Link 
+                            className="font-bold text-blue-600">
+                            Read more ..</Link></p>
+                        : <p>{description}</p>
+                }</p>
+                <div className="card-actions ">
                     <h1 className="flex justify-center items-center"> <FaLocationDot /> {location}</h1>
                     <h1 className="flex justify-center items-center"><FaChartArea></FaChartArea> {area} ft<sup>2</sup></h1>
                     <h1 className="flex justify-center items-center gap-1"><HiStatusOnline></HiStatusOnline>{status}</h1>
-                    <button className="badge badge-secondary">View</button>
+                   <Link to="/CardDetails"> <button className="badge badge-primary p-3">View</button></Link>
                 </div>
             </div>
         </div>

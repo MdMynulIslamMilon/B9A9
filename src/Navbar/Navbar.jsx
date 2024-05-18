@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../Authprovider/AuthProvider';
 const Navbar = () => {
+    const {user,logOut} = useContext(AuthContext) ;
+
+    const handleSignOut = e => {
+      logOut()
+      .then()
+      .catch()
+    }
     return (
         <div className="navbar bg-base-200">
             <div className="navbar-start">
@@ -21,12 +29,18 @@ const Navbar = () => {
                 <li><NavLink to="/">Home</NavLink> </li>
                 <li><NavLink to="/demo">Demo</NavLink> </li>
                 <li><NavLink to="/about">About</NavLink> </li>
-                <li><NavLink to="/login">Login</NavLink> </li>
+                <li><NavLink to="/login">signIn</NavLink> </li>
             </div>
             <div className="navbar-end">
-                <button className="bg-yellow-300 y px-3 py-1 rounded-lg text-[15px] ">
-                    SignIn
-                </button>
+               {
+                user ?  
+                <button onClick={handleSignOut} className="bg-yellow-300 y px-3 py-1 rounded-lg text-[15px] ">
+                SignOut</button> 
+                : 
+               <li className='list-none'><NavLink to="/login"> <button className="bg-yellow-300 y px-3 py-1 rounded-lg text-[15px] ">
+               SignIn
+               </button></NavLink></li>
+               }
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full">
                         <img alt="Tailwind CSS Navbar component" src="https://i.ibb.co/GtRR5nx/banner.jpg" />
