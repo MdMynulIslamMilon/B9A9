@@ -6,44 +6,46 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { AuthContext } from '../Authprovider/AuthProvider';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 const Registtration = () => {
-//  const [success,setSuccess] = useState('');
-const {createUser} = useContext(AuthContext);
-  const handleSubmit = e => {
+   const [success,setSuccess] = useState('');
+  const [showPassword,setshowPassword] = useState('')
+  const { createUser } = useContext(AuthContext);
+  const handleSignOut = e => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const name = form.get('name')
     const email = form.get('email')
     const password = form.get('password')
     const url = form.get('url')
-    console.log(name,email, password, url)
-//     if (password.length < 5) {
-//       toast.error('password at least 6 number or longer')
-//       return;
-//   }
-//   else if (!/[A-Z]/.test(password)) {
-//       toast.error('your password need at least 1 laege charcter')
-//       return;
-//   }
-//   else if(!accept){
-//     setRegister('please accept our term and condition')
-//     return;
-// }
+    console.log(name, email, password, url)
+    //     if (password.length < 5) {
+    //       toast.error('password at least 6 number or longer')
+    //       return;
+    //   }
+    //   else if (!/[A-Z]/.test(password)) {
+    //       toast.error('your password need at least 1 laege charcter')
+    //       return;
+    //   }
+    //   else if(!accept){
+    //     toast.error('please accept our term and condition')
+    //     return;
+    // }
 
-   createUser(email,password)
-   .then(result =>{
-     console.log(result.user)
-   })
-   .catch(error =>{
-     console.log(error)
-   })
+    createUser(email, password)
+      .then(result => {
+        console.log(result.user)
+      })
+      .catch(error => {
+        console.log(error)
+      })
 
   }
   return (
     <div>
       <Navbar></Navbar>
       <div class=" mx-auto mt-8 w-full max-w-sm p-4 bg-red-300 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-        <form class="space-y-6" onSubmit={handleSubmit}>
+        <form class="space-y-6" onSubmit={handleSignOut}>
           <h5 class="text-xl text-white font-medium text-gray-900 dark:text-white">
             Sign in to our platform
           </h5>
@@ -78,7 +80,7 @@ const {createUser} = useContext(AuthContext);
               placeholder="name@company.com"
               required
             />
-          </div>      
+          </div>
           <div>
             <label
               for="password"
@@ -86,14 +88,22 @@ const {createUser} = useContext(AuthContext);
             >
               Your password
             </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="••••••••"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-              required
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                id="password"
+                placeholder="••••••••"
+                class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                required
+              />
+              <span className="absolute top-3 right-3"
+                onClick={() => setshowPassword(!showPassword)}>
+                {
+                  showPassword ? <AiFillEye /> : <AiFillEyeInvisible />
+                }
+              </span>
+            </div>
           </div>
           <div>
             <label
@@ -147,7 +157,7 @@ const {createUser} = useContext(AuthContext);
             <NavLink to="/login" className="text-blue-700">Login</NavLink>
           </div>
         </form>
-        
+
         <ToastContainer></ToastContainer>
       </div>
       <Footer></Footer>

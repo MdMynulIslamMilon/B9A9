@@ -1,28 +1,35 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../Authprovider/AuthProvider";
+import Footer from "../Footer/Footer";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 const Login = () => {
-  const {signIn,user} = useContext(AuthContext);
-  const handleSignIn =(e)=>{
-    e.preventDefault ();
+  const { signIn } = useContext(AuthContext);
+  const [showPassword, setshowPassword] = useState('');
+  const [user,setUser] = useState('');
+  const location = useLocation();
+ const navigate = useNavigate();
+  const handleSignIn = (e) => {
+    e.preventDefault();
     const form = new FormData(e.currentTarget);
-      const email = form.get('email');
-      const password = form.get('password');
-      console.log(email,password);
-      signIn(email,password)
+    const email = form.get('email');
+    const password = form.get('password');
+    console.log(email, password);
+    signIn(email, password)
       .then(result => {
-        console.log(result)
+        setUser(result)
+        navigate(location?.state ? location.state : '/')
       })
-      .catch(error =>{
-        console.log(error)
+      .catch(error => {
+       setUser(error)
       })
-   
+
   }
   return (
     <div>
       <Navbar></Navbar>
-      <div class=" mx-auto mt-2 w-full max-w-sm p-4 bg-red-300 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <div class=" mx-auto my-2 w-full max-w-sm p-4 bg-red-300 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
         <form class="space-y-6" onSubmit={handleSignIn}>
           <h5 class="text-xl text-white font-medium text-gray-900 dark:text-white">
             Sign in to our platform
@@ -50,14 +57,23 @@ const Login = () => {
             >
               Your password
             </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="••••••••"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-              required
-            />
+
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                id="password"
+                placeholder="••••••••"
+                class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                required
+              />
+              <span className="absolute top-3 right-3"
+                onClick={() => setshowPassword(!showPassword)}>
+                {
+                  showPassword ? <AiFillEye /> : <AiFillEyeInvisible />
+                }
+              </span>
+            </div>
           </div>
           <div class="flex items-start">
             <div class="flex items-start">
@@ -84,26 +100,27 @@ const Login = () => {
               Lost Password?
             </a>
           </div>
-        {
-          user ?   <button 
-          type="submit"
-          class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          SignOut to your account
-        </button> 
-        :   <button 
-        type="submit"
-        class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      >
-        SignIn to your account
-      </button>
-        }
+          {
+            user ? <button
+              type="submit"
+              class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              SignOut to your account
+            </button>
+              : <button
+                type="submit"
+                class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                SignIn to your account
+              </button>
+          }
           <div className="flex gap-2 ">
             <h3>Dont have a account ?</h3>
             <NavLink to="/Registration" className="text-blue-700">Create Account</NavLink>
           </div>
         </form>
       </div>
+      <Footer></Footer>
     </div>
   );
 };
