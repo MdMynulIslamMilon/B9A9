@@ -8,6 +8,8 @@ import PrivateRoutes from "./PrivateRoutes";
 import Card from "../Card/Card";
 import CardDetails from "../CardDetails/CardDetails";
 import Notfound from "../Notfound/Notfound";
+import Choose from "../Choose/Choose";
+import Explore from "../Explore/Explore";
 const Routes = createBrowserRouter([
     {
         path:"/",
@@ -40,7 +42,17 @@ const Routes = createBrowserRouter([
             {
                 path:"/",
                 element:<Notfound></Notfound>
+            },
+            {
+                path:"/Choose",
+                element:<Choose></Choose>
+            },
+            {
+                path:"/explore",
+                element:<Explore></Explore>
             }
+          
+         
          
         ]
     }

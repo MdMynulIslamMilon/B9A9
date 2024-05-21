@@ -9,9 +9,9 @@ const Estate = () => {
     }, []);
     return (
         <div>
-            <div className="">
-                <h1>Discover our feature listings</h1>
-                <p>A real estate business involves buying, selling, managing, operating,
+            <div className=" my-6">
+                <h1 className="text-3xl font-semibold text-[#ff00d3] text-center">Discover our feature listings</h1>
+                <p className="text-xl mx-auto lg:w-[950px] mt-2">A real estate business involves buying, selling, managing, operating,
                     or investing in land and buildings. Real estate can also include natural
                     resources below or above the ground, such as crops, minerals, or water.</p>
             </div>

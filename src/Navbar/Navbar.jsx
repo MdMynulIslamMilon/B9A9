@@ -10,7 +10,7 @@ const Navbar = () => {
       .catch()
     }
     return (
-        <div className="navbar bg-base-200">
+        <div className="navbar bg-base-200 animate__animated animate__backInLeft animate__delay-1s">
             <div className="navbar-start">
                 <div className='hidden sm:block'><h1 className='text-2xl font-extrabold'>Dream <span className='text-yellow-300  '>Haven</span></h1></div>
                 <div className="dropdown block sm:hidden">

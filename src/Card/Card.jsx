@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 const Card = ({ card }) => {
     const {id, image, title, description, price, status, area, location,  segment } = card;
     return (
-        <div  className="card bg-base-100 shadow-xl h-[450px] w-[400px] ">
+        <div  className="card bg-base-100 shadow-xl h-[450px] w-[400px] mx-auto">
             <figure>
                 <img
                     src={image}

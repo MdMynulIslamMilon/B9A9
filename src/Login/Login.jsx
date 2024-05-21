@@ -4,25 +4,49 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../Authprovider/AuthProvider";
 import Footer from "../Footer/Footer";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { FaFacebook, FaGoogle } from "react-icons/fa6";
+import { GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup } from "firebase/auth";
+import app from "../Firebase/Firebase.init";
 const Login = () => {
   const { signIn } = useContext(AuthContext);
   const [showPassword, setshowPassword] = useState('');
-  const [user,setUser] = useState('');
+  const [user, setUser] = useState('');
   const location = useLocation();
- const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  //  google login
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+  const handleGoogleLogin = () => {
+    console.log('something commes')
+    signInWithPopup(auth, provider)
+      .then(result => {
+        const user = result.user
+        console.log(user)
+      })
+      .catch(error => {
+        console.log(error.message)
+      })
+  }
+  // Github login
+  const handleGitHubLogIn = () => {
+    console.log('comes from github')
+  }
+
+  // email sign in
   const handleSignIn = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const email = form.get('email');
     const password = form.get('password');
-    console.log(email, password);
     signIn(email, password)
       .then(result => {
         setUser(result)
         navigate(location?.state ? location.state : '/')
       })
       .catch(error => {
-       setUser(error)
+        setUser(error)
       })
 
   }
@@ -47,7 +71,7 @@ const Login = () => {
               id="email"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="name@company.com"
-              required
+
             />
           </div>
           <div>
@@ -65,7 +89,6 @@ const Login = () => {
                 id="password"
                 placeholder="••••••••"
                 class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                required
               />
               <span className="absolute top-3 right-3"
                 onClick={() => setshowPassword(!showPassword)}>
@@ -83,7 +106,6 @@ const Login = () => {
                   type="checkbox"
                   value=""
                   class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-                  required
                 />
               </div>
               <label
@@ -99,6 +121,12 @@ const Login = () => {
             >
               Lost Password?
             </a>
+          </div>
+          <div className="flex justify-between gap-4 list-none">
+            <li> <button onClick={handleGoogleLogin} className="bg-purple-100 shadow-lg p-2 rounded-lg">google login</button></li>
+
+              <li> <button onClick={handleGitHubLogIn} className="bg-purple-100 shadow-lg p-2 rounded-lg">Github</button></li>
+
           </div>
           {
             user ? <button
