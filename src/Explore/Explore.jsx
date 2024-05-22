@@ -42,7 +42,7 @@ const Explore = () => {
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <div className='h-16 w-auto'><img src="https://i.ibb.co/yQQnrXJ/explore-3-1.jpg" alt="" /></div>
+                        <div className='lg:h-16 w-auto'><img src="https://i.ibb.co/yQQnrXJ/explore-3-1.jpg" alt="" /></div>
                         <div className='absolute top-24 left-20  text-3xl text-red-600 font-bold shadow-lg text-center '>
                             <h1>FOR RENT</h1>
                             <h1>JEDDA</h1>
