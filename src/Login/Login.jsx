@@ -5,7 +5,7 @@ import { AuthContext } from "../Authprovider/AuthProvider";
 import Footer from "../Footer/Footer";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { FaFacebook, FaGoogle } from "react-icons/fa6";
-import { GoogleAuthProvider } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import { getAuth, signInWithPopup } from "firebase/auth";
 import app from "../Firebase/Firebase.init";
 const Login = () => {
@@ -17,20 +17,30 @@ const Login = () => {
 
   //  google login
   const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
+  const googleProvider = new GoogleAuthProvider();
   const handleGoogleLogin = () => {
-    console.log('something commes')
-    signInWithPopup(auth, provider)
+    signInWithPopup(auth, googleProvider)
       .then(result => {
-        const user = result.user
-        console.log(user)
+        setUser(result)
+        navigate(location?.state ? location.state : '/')
       })
       .catch(error => {
-        console.log(error.message)
+        setUser(error)
       })
   }
   // Github login
+  const provider = new GithubAuthProvider();
   const handleGitHubLogIn = () => {
+    
+    console.log('comes from github')
+    signInWithPopup(auth, provider)
+    .then(result => {
+      setUser(result)
+      navigate(location?.state ? location.state : '/')
+    })
+    .catch(error => {
+      setUser(error)
+    })
     console.log('comes from github')
   }
 
@@ -48,13 +58,12 @@ const Login = () => {
       .catch(error => {
         setUser(error)
       })
-
   }
   return (
     <div>
       <Navbar></Navbar>
       <div class=" mx-auto my-2 w-full max-w-sm p-4 bg-red-300 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-        <form class="space-y-6" onSubmit={handleSignIn}>
+        <form class="space-y-6 " onSubmit={handleSignIn}>
           <h5 class="text-xl text-white font-medium text-gray-900 dark:text-white">
             Sign in to our platform
           </h5>
@@ -128,20 +137,13 @@ const Login = () => {
               <li> <button onClick={handleGitHubLogIn} className="bg-purple-100 shadow-lg p-2 rounded-lg">Github</button></li>
 
           </div>
-          {
-            user ? <button
-              type="submit"
-              class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              SignOut to your account
-            </button>
-              : <button
+        <button 
                 type="submit"
                 class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 SignIn to your account
               </button>
-          }
+         
           <div className="flex gap-2 ">
             <h3>Dont have a account ?</h3>
             <NavLink to="/Registration" className="text-blue-700">Create Account</NavLink>

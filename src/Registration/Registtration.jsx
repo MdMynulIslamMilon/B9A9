@@ -4,14 +4,12 @@ import { NavLink } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { AuthContext } from '../Authprovider/AuthProvider';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 const Registtration = () => {
-   const [success,setSuccess] = useState('');
   const [showPassword,setshowPassword] = useState('')
   const { createUser } = useContext(AuthContext);
-  const handleSignOut = e => {
+  const handleSignUp = e => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const name = form.get('name')
@@ -19,33 +17,31 @@ const Registtration = () => {
     const password = form.get('password')
     const url = form.get('url')
     console.log(name, email, password, url)
-    //     if (password.length < 5) {
-    //       toast.error('password at least 6 number or longer')
-    //       return;
-    //   }
-    //   else if (!/[A-Z]/.test(password)) {
-    //       toast.error('your password need at least 1 laege charcter')
-    //       return;
-    //   }
-    //   else if(!accept){
-    //     toast.error('please accept our term and condition')
-    //     return;
-    // }
-
-    createUser(email, password)
-      .then(result => {
-        console.log(result.user)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-
+    createUser (email,password)
+    
+        if (password.length < 6) {
+          toast.error('password at least 6 number or longer')
+          return;
+      }
+      else if (!/[A-Z]/.test(password)) {
+          toast.error('your password need at least 1 laege charcter')
+          return;
+      }
+      else if(!/[a-z]/.test(password)) {
+        toast.error('Your password needs at least one lowercase character.');
+        return;
+      }
+      else{
+        toast.success('Successfully registration done and go log in page')
+        return;
+    } 
+    
   }
   return (
     <div>
       <Navbar></Navbar>
-      <div class=" mx-auto mt-8 w-full max-w-sm p-4 bg-red-300 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-        <form class="space-y-6" onSubmit={handleSignOut}>
+      <div class=" mx-auto my-8  w-full max-w-sm p-4 bg-red-300 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <form class="space-y-6" onSubmit={handleSignUp}>
           <h5 class="text-xl text-white font-medium text-gray-900 dark:text-white">
             Sign in to our platform
           </h5>
@@ -121,38 +117,14 @@ const Registtration = () => {
               required
             />
           </div>
-          <div class="flex items-start">
-            <div class="flex items-start">
-              <div class="flex items-center h-5">
-                <input
-                  id="remember"
-                  type="checkbox"
-                  value=""
-                  class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-                  required
-                />
-              </div>
-              <label
-                for="remember"
-                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-                Remember me
-              </label>
-            </div>
-            <a
-              href="#"
-              class="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500"
-            >
-              Lost Password?
-            </a>
-          </div>
+    
           <button
             type="submit"
             class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Register to your account
           </button>
-          <div className="flex gap-2 ">
+          <div className="flex gap-2 justify-center">
             <h3> have a account ? plese</h3>
             <NavLink to="/login" className="text-blue-700">Login</NavLink>
           </div>
