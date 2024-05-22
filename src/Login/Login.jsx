@@ -19,6 +19,7 @@ const Login = () => {
   const auth = getAuth(app);
   const googleProvider = new GoogleAuthProvider();
   const handleGoogleLogin = () => {
+    console.log('something commes')
     signInWithPopup(auth, googleProvider)
       .then(result => {
         setUser(result)
@@ -58,6 +59,7 @@ const Login = () => {
       .catch(error => {
         setUser(error)
       })
+ 
   }
   return (
     <div>

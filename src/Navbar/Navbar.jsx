@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../Authprovider/AuthProvider';
+
 const Navbar = () => {
     const {user,logOut} = useContext(AuthContext) ;
 
@@ -26,18 +27,16 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="list-none gap-4 text-xl font-semibold hidden lg:flex md:flex">
-                <li><NavLink to="/">Home</NavLink> </li>
-                <li><NavLink to="/demo">Demo</NavLink> </li>
-                <li><NavLink to="/about">About</NavLink> </li>
+                <li><NavLink to="/"  activeClassName="active">Home</NavLink> </li>
                 <li><NavLink to="/Registration">Register</NavLink> </li>
             </div>
             <div className="navbar-end">
                {
                 user ?  
-                <button onClick={handleSignOut} className="bg-yellow-300 y px-3 py-1 rounded-lg text-[15px] ">
+                <button onClick={handleSignOut} activeClassName="active" className="bg-yellow-300 y px-3 py-1 rounded-lg text-[15px] ">
                 SignOut</button> 
                 : 
-               <li className='list-none'><NavLink to="/login"> <button className="bg-yellow-300 y px-3 py-1 rounded-lg text-[15px] ">
+               <li className='list-none'><NavLink to="/login" activeClassName="active"> <button className="bg-yellow-300 y px-3 py-1 rounded-lg text-[15px] ">
                SignIn
                </button></NavLink></li>
                }

@@ -18,7 +18,6 @@ const Registtration = () => {
     const url = form.get('url')
     console.log(name, email, password, url)
     createUser (email,password)
-    
         if (password.length < 6) {
           toast.error('password at least 6 number or longer')
           return;
